@@ -1,0 +1,19 @@
+app/code/community/Gruenspar/SortedDbLayouts/ app/code/community/Gruenspar/SortedDbLayouts/
+app/etc/modules/Gruenspar_SortedDbLayouts.xml app/etc/modules/Gruenspar_SortedDbLayouts.xml
+
+# Shell scripts to be executed after installation:
+@shell echo "--"
+## Adding as this module as a GIT submodule to the parent repo...
+@shell MODULE_NAME="$(basename ${MODULE})" && echo "Adding '${MODULE_NAME}' as a GIT submodule..." && cd ../../ && git submodule add -f https://github.com/nocturnalfrog/magento-sorted-db-layouts.git .modman/${MODULE_NAME}/
+
+## Enabling template symlinks
+@shell echo "--"
+@shell echo "Allow symlinks"
+@shell n98-magerun dev:symlinks --on --global
+
+## Clearing the Magento caches
+@shell echo "--"
+@shell echo "Clearing Magento Caches..."
+@shell n98-magerun cache:flush
+
+@shell echo "--"
